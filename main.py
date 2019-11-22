@@ -1,4 +1,5 @@
-#!/bin/env python3   #
+#!/usr/bin/env python3
+
 # Init
 import discord
 import os
@@ -94,9 +95,12 @@ async def on_message(msg):
 	else: # client.user in msg.mentions
 		args.remove(client.user.mention)
 
+	if len(args) == 0:
+		return
+
 	if args[0].lower() == "prefix":
 		if len(args) == 1:
-			await msg.channel.send('The prefix is "'+prefix+'"')
+			await msg.channel.send('Current prefix is "'+prefix+'"')
 		else:
 			if sender_is_moderator:
 				print(len(args[1])) 
@@ -139,6 +143,8 @@ async def on_message(msg):
 			if not sender_is_moderator:
 				await msg.channel.send("Insufficient Permissions")
 				return
+		else:
+			await msg.channel.send("you can't '" + args[1] + "' mods")
 	elif args[0].lower() in {"ban", "banword"}: 
 		if not sender_is_moderator:
 			await msg.channel.send("Insufficient Permissions :(")
