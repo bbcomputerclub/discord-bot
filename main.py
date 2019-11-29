@@ -179,6 +179,12 @@ async def on_message(msg):
 		for user in users:
 			string += user.name + "#" + str(user.discriminator) + " - " + str(server.get_rep(user)) + "\n"
 		await msg.channel.send(string)			
+	elif args[0].lower() in {"help","commands","cmds"}:
+			embed = discord.Embed(
+			title = "Commands:",
+			body = "help = Here you are!"+"\n"+"This should be on line 2?"
+    	)
+			await msg.channel.send(embed = embed)
 	else:
 		await msg.channel.send("I don't understand gibberish, " + msg.author.mention)
 
